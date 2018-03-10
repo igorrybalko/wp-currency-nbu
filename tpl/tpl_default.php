@@ -1,7 +1,7 @@
 <?php
  /**
  * @author Rybalko Igor
- * @version 1.0
+ * @version 1.0.1
  * @copyright (C) 2018 http://wolfweb.com.ua
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  *

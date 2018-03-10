@@ -3,7 +3,7 @@
 Plugin Name: Currency NBU
 Plugin URI: http://wolfweb.com.ua
 Description: Shows exchange rates USD, EUR and RUB
-Version: 0.1.0
+Version: 1.0.1
 Author: Rybalko Igor
 Author URI: http://wolfweb.com.ua
 */
@@ -27,7 +27,7 @@ Author URI: http://wolfweb.com.ua
 class WolfCurrencyNbu extends WP_Widget
 {
     public function __construct() {
-        parent::__construct("Posts", "Currency NBU",
+        parent::__construct("widget_currency_nbu", "Currency NBU",
             array("description" => "Shows exchange rates USD, EUR and RUB"));
     }
 
