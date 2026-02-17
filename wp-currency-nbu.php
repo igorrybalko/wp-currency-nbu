@@ -1,34 +1,20 @@
 <?php
 /*
 Plugin Name: Currency NBU
-Plugin URI: http://wolfweb.com.ua
-Description: Shows exchange rates USD, EUR and RUB
-Version: 1.0.1
-Author: Rybalko Igor
-Author URI: http://wolfweb.com.ua
+Plugin URI: https://webstep.top
+Description: Shows exchange rates USD, EUR and PLN
+Version: 1.1.0
+Author: Rybalko Ihor
+Author URI: https://stringutils.online
+License: GPL3
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
-/*  Copyright 2017  Rybalko Igor  (email : igorrybalko2009@gmail.com)
-
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-
-class WolfCurrencyNbu extends WP_Widget
+class WpCurrencyNbu extends WP_Widget
 {
     public function __construct() {
         parent::__construct("widget_currency_nbu", "Currency NBU",
-            array("description" => "Shows exchange rates USD, EUR and RUB"));
+            ["description" => "Shows exchange rates USD, EUR and PLN"]);
     }
 
     public function form($instance) {
@@ -52,7 +38,7 @@ class WolfCurrencyNbu extends WP_Widget
 
         $cacheTimeFieldId = $this->get_field_id("cacheTime");
         $cacheTimeFieldName = $this->get_field_name("cacheTime");
-        echo '<p><label for="' . $cacheTimeFieldId . '">Cache time:</label><br>';
+        echo '<p><label for="' . $cacheTimeFieldId . '">Cache time (in seconds):</label><br>';
         echo '<input id="' . $cacheTimeFieldId . '" type="number" name="' .
             $cacheTimeFieldName . '" value="' . $cacheTime . '"></p>';
 
@@ -100,5 +86,5 @@ class WolfCurrencyNbu extends WP_Widget
 
 }
 add_action("widgets_init", function () {
-    register_widget("WolfCurrencyNbu");
+    register_widget("WpCurrencyNbu");
 });

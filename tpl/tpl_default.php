@@ -1,20 +1,10 @@
-<?php
- /**
- * @author Rybalko Igor
- * @version 1.0.1
- * @copyright (C) 2018 http://wolfweb.com.ua
- * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
- *
-*/
- 
-?>
-<div class="modcurrNBU">
+<div class="c-nbu">
     <ul>
-        <li>USD: <?php echo $data['usd']; ?></li>
-        <li>EUR: <?php echo $data['eur']; ?></li>
-        <li>RUB: <?php echo $data['rub']; ?></li>
+        <li><span>USD:</span> <span><?php echo $data['usd']; ?></span></li>
+        <li><span>EUR:</span> <span><?php echo $data['eur']; ?></span></li>
+        <li><span>PNL:</span> <span><?php echo $data['pnl']; ?></span></li>
     </ul>
-    <div class="datecurr">
+    <div class="c-nbu__date">
         <?php echo $data['date']; ?>
     </div>  
 </div>

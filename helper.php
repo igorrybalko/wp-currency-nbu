@@ -1,40 +1,22 @@
-<?php
- /**
- * @author Rybalko Igor
- * @version 1.0.1
- * @copyright (C) 2018 http://wolfweb.com.ua
- * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
- *
-*/
- 
+<?php 
 class CurrencyNbuHelper{
 	
 	private $cacheFile = __DIR__ . '/data.json';
  
-	private function _writeCache()
-	{
-	    
-	    file_put_contents($this->cacheFile, json_encode($this->_getNBURate()));
-	 
-	}
-	 
+
 	
 	public function getRates($cache_time){
 
-		$curTime = time(); 
+		if (file_exists($this->cacheFile) && (filemtime($this->cacheFile) > (time() - $cache_time))) {
+			// Getting data from the cache
+			$file = file_get_contents($this->cacheFile);
 
-		if (!file_exists($this->cacheFile)) {
-		    $this->_writeCache($this->cacheFile);
-		} else {
-		    $fMtime = filemtime($this->cacheFile);
-		    if (($curTime - $fMtime) > $cache_time) {
-		        $this->_writeCache($this->cacheFile);
-		    }
-		}
-
-
-		$rates = json_decode(file_get_contents($this->cacheFile), 1);
-
+			return json_decode(file_get_contents($this->cacheFile), 1);
+		} 
+			
+		$rates = $this->_getNBURate();
+		file_put_contents($this->cacheFile, json_encode($rates), LOCK_EX);
+	
 		return $rates;
 	}
 
@@ -46,7 +28,7 @@ class CurrencyNbuHelper{
 	private function _getNBURate(){
 		$date  = date('d.m.Y');
 		$rates = [];
-		$currency = json_decode(file_get_contents('http://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'));
+		$currency = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'));
 
 		if (is_array($currency)) {
 			foreach($currency as $v){
@@ -57,8 +39,8 @@ class CurrencyNbuHelper{
 					case 'EUR':
 						$rateEUR = $this->_roundRate($v->rate);
 						break;
-					case 'RUB':
-						$rateRUB = $this->_roundRate($v->rate);
+					case 'PLN':
+						$ratePNL = $this->_roundRate($v->rate);
 						break;
 				}
 			}
@@ -66,7 +48,7 @@ class CurrencyNbuHelper{
 			$rates = [
 				'usd'   => $rateUSD,
 				'eur'   => $rateEUR,
-				'rub'   => $rateRUB,
+				'pnl'   => $ratePNL,
 				'date'  => $date
 			];
 
