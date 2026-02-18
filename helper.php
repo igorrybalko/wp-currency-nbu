@@ -3,8 +3,6 @@ class CurrencyNbuHelper{
 	
 	private $cacheFile = __DIR__ . '/data.json';
  
-
-	
 	public function getRates($cache_time){
 
 		if (file_exists($this->cacheFile) && (filemtime($this->cacheFile) > (time() - $cache_time))) {
@@ -21,13 +19,18 @@ class CurrencyNbuHelper{
 	}
 
 	private function _roundRate($rate){
-	    $result = sprintf("%.2f", ceil( (float) $rate * 100) / 100);
-	     return $result;
+	    return sprintf("%.2f", ceil( (float) $rate * 100) / 100);
 	}
 
 	private function _getNBURate(){
 		$date  = date('d.m.Y');
-		$rates = [];
+		$rates = [
+			'usd'   => '',
+			'eur'   => '',
+			'pln'   => '',
+			'date'  => $date,
+		];
+
 		$currency = json_decode(file_get_contents('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'));
 
 		if (is_array($currency)) {
@@ -40,7 +43,7 @@ class CurrencyNbuHelper{
 						$rateEUR = $this->_roundRate($v->rate);
 						break;
 					case 'PLN':
-						$ratePNL = $this->_roundRate($v->rate);
+						$ratePLN = $this->_roundRate($v->rate);
 						break;
 				}
 			}
@@ -48,8 +51,8 @@ class CurrencyNbuHelper{
 			$rates = [
 				'usd'   => $rateUSD,
 				'eur'   => $rateEUR,
-				'pnl'   => $ratePNL,
-				'date'  => $date
+				'pln'   => $ratePLN,
+				'date'  => $date,
 			];
 
 		}
