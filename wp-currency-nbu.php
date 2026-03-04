@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Currency NBU
-Plugin URI: https://webstep.top
+Plugin URI: https://webstep.top/ua/cms/classic-wordpress-widget-nbu/
 Description: Shows exchange rates USD, EUR and PLN
 Version: 1.1.0
 Author: Ihor Rybalko
