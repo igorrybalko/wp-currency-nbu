@@ -3,7 +3,7 @@
 Plugin Name: Currency NBU
 Plugin URI: https://webstep.top/ua/cms/classic-wordpress-widget-nbu/
 Description: Shows exchange rates USD, EUR and PLN
-Version: 1.1.0
+Version: 1.1.1
 Author: Ihor Rybalko
 Author URI: https://stringutils.online
 License: GPL3
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 */
 
 class WcnPluginConfig {
-    public static $version = '1.1.0'; 
+    public static $version = '1.1.1'; 
 }
 
 class WpCurrencyNbu extends WP_Widget
